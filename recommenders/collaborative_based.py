@@ -66,9 +66,12 @@ def prediction_item(item_id):
     a_train = load_df.build_full_trainset()
 
     predictions = []
-    for ui in a_train.all_users():
+    pred_items = model.predict(a_train)
+    predictions = list(pred_items)
+    
+#     for ui in a_train.all_users():
 #         predictions.append(model.predict(a_train)
-        predictions.append(model.predict(iid=item_id,uid=ui, verbose = False))
+#         predictions.append(model.predict(iid=item_id,uid=ui, verbose = False))
     return predictions
 
 def pred_movies(movie_list):
