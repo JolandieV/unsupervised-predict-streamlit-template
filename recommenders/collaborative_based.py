@@ -145,11 +145,12 @@ def collab_model(movie_list,top_n=10):
     # Cosine similarity matrix
     user_similarity = cosine_similarity(util_matrix_sparse.T)
     user_sim_df = pd.DataFrame(user_similarity, index = util_matrix.columns, columns = util_matrix.columns)
-    
+    user_similarity = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
+    user_sim_df = pd.DataFrame(user_similarity, index = df_init_users['movieId'].values.astype(int), columns = df_init_users['movieId'].values.astype(int))
     user_sim_df = user_sim_df.loc[~user_sim_df.index.duplicated(keep='first')]
     user_sim_df = user_sim_df.T
     
-    # REMOVE THIS cosine_sim = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
+    cosine_sim = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
     idx_1 = indices[indices == movie_list[0]].index[0]
     idx_2 = indices[indices == movie_list[1]].index[0]
     idx_3 = indices[indices == movie_list[2]].index[0]
